@@ -64,7 +64,7 @@ class ACMOJClient:
 
         except requests.exceptions.RequestException as e:
             print(f"API Request failed: {e}")
-            if 'response' in locals() and response:
+            if 'response' in locals() and response is not None:
                 print(f"Response text: {response.text}")
             return None
 
@@ -139,7 +139,7 @@ def main():
     if args.command == "submit":
         try:
             with open(args.code_file, 'r', encoding='utf-8') as f:
-                code_text = f.read()
+                code_text = f.read().strip()
         except FileNotFoundError:
             print(f"Error: Code file not found at {args.code_file}")
             exit(1)
